@@ -10,7 +10,7 @@ import { FeesRecord } from 'src/entity/fees-record.entity';
 import { Fees } from 'src/entity/fees.entity';
 import { FeesReceipt } from 'src/entity/fees-receipt.entity';
 import { FeesService } from 'src/fees/fees.service';
-import { LocationService } from 'src/location/location.service';
+
 
 
 @Module({
@@ -26,6 +26,6 @@ import { LocationService } from 'src/location/location.service';
     ]),
   ],
   controllers: [SchoolController],
-  providers: [SchoolService, FeesService],
+  providers: [SchoolService],
 })
 export class SchoolModule {}

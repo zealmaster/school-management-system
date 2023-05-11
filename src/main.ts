@@ -21,6 +21,6 @@ async function bootstrap() {
   app.enableCors();
   app.use(passport.initialize());
   app.use(passport.session());
-  await app.listen(4000);
+  await app.listen(process.env.PORT || 4000);
 }
 bootstrap();

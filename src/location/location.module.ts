@@ -29,7 +29,7 @@ import { User } from 'src/entity/user.entity';
     ]),
   ],
   controllers: [LocationController],
-  providers: [LocationService, SchoolService, FeesService],
+  providers: [LocationService, SchoolService],
   exports: [LocationService],
 })
 export class LocationModule {}

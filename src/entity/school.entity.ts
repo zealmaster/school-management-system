@@ -4,11 +4,13 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { Location } from './location.entity';
 import { User } from './user.entity';
+import { Student } from './student.entity';
 
 @Entity('schools')
 export class School {
@@ -52,4 +54,7 @@ export class School {
   @ManyToOne(() => User, (user) => user.school)
   @JoinColumn({ name: 'user_id' })
   user: User;
+
+  @OneToMany(() => Student, (student) => student.school)
+  students: Student;
 }

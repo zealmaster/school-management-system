@@ -2,9 +2,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { School } from './school.entity';
 
 @Entity('students')
 export class Student {
@@ -115,4 +118,10 @@ export class Student {
     type: 'datetime',
   })
   updatedAt: Date;
+
+  // Relations
+
+  @ManyToOne(() => School, (school) => school.students)
+  @JoinColumn({ name: 'school_id' })
+  school: School;
 }

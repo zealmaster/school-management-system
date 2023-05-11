@@ -14,6 +14,7 @@ import { EmailModule } from './email/email.module';
 import { FeesModule } from './fees/fees.module';
 import { TeacherModule } from './teacher/teacher.module';
 import { SubjectModule } from './subject/subject.module';
+import { StudentModule } from './student/student.module';
 
 @Module({
   imports: [
@@ -31,6 +32,7 @@ import { SubjectModule } from './subject/subject.module';
     FeesModule,
     TeacherModule,
     SubjectModule,
+    StudentModule,
   ],
   controllers: [AppController],
   providers: [AppService],

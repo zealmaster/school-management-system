@@ -9,10 +9,9 @@ import { StudentLogin } from 'src/entity/studentLogin.entity';
 import { FEES_STATUS, FeesService } from 'src/fees/fees.service';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { generatePassword } from 'src/strings';
 
-export const studentPassword = `PWD${Math.round(
-  Math.random() * 100000,
-).toString()}`;
+
 
 @Injectable()
 export class StudentService {
@@ -40,11 +39,11 @@ export class StudentService {
       student.level,
       student.schoolId,
     );
-    const password = await bcrypt.hash(studentPassword, 10);
+    const password = await bcrypt.hash(generatePassword, 10);
     const studentLogin = await this.studentLoginRepo.save({
       studentId: student.studentId,
       password: password,
-      passwordTemp: studentPassword,
+      passwordTemp: generatePassword,
     });
     const feesRecord = {
       schoolId: student.schoolId,

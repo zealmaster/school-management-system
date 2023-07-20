@@ -11,6 +11,7 @@ import {
 import { Location } from './location.entity';
 import { User } from './user.entity';
 import { Student } from './student.entity';
+import { Teacher } from './teacher.entity';
 
 @Entity('schools')
 export class School {
@@ -57,4 +58,7 @@ export class School {
 
   @OneToMany(() => Student, (student) => student.school)
   students: Student;
+
+  @OneToMany(() => Teacher, (teacher) => teacher.school)
+  teacher: Teacher[];
 }

@@ -6,8 +6,8 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 
-@Entity('subjects')
-export class Subject {
+@Entity('teacher_logins')
+export class TeacherLogin {
   @PrimaryGeneratedColumn({
     name: 'id',
     type: 'bigint',
@@ -16,34 +16,22 @@ export class Subject {
   id: number;
 
   @Column({
-    name: 'name',
-    type: 'varchar',
-  })
-  name: string;
-
-  @Column({
-    name: 'level',
-    type: 'varchar',
-  })
-  level: string;
-
-  @Column({
-    name: 'school_id',
-    type: 'bigint',
-  })
-  schoolId: number;
-
-  @Column({
     name: 'teacher_id',
-    type: 'bigint',
+    type: 'varchar',
   })
   teacherId: number;
 
   @Column({
-    name: 'session',
+    name: 'password',
     type: 'varchar',
   })
-  session: string;
+  password: string;
+
+  @Column({
+    name: 'password_temp',
+    type: 'varchar',
+  })
+  passwordTemp: string;
 
   @CreateDateColumn({
     name: 'created_at',
@@ -52,8 +40,8 @@ export class Subject {
   createdAt: Date;
 
   @UpdateDateColumn({
-    name: 'updated_at',
-    type: 'varchar',
+    name: 'login_at',
+    type: 'datetime',
   })
-  updatedAt: Date;
+  loginAt: Date;
 }

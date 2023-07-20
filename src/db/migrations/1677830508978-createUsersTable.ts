@@ -5,11 +5,11 @@ export class createUsersTable1677830508978 implements MigrationInterface {
     await queryRunner.query(
       `CREATE TABLE users (
         id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-        username VARCHAR(50),
-        first_name VARCHAR(50),
-        last_name VARCHAR(50),
+        username VARCHAR(200),
+        first_name VARCHAR(200),
+        last_name VARCHAR(200),
         email VARCHAR(255),
-        password VARCHAR(20),
+        password VARCHAR(100),
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP)`,
     );

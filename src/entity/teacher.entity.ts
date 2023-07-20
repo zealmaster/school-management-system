@@ -3,9 +3,12 @@ import {
   CreateDateColumn,
   Entity,
   Index,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { School } from './school.entity';
 
 @Entity('teachers')
 export class Teacher {
@@ -15,6 +18,12 @@ export class Teacher {
     unsigned: true,
   })
   id: number;
+
+  @Column({
+    name: 'school_id',
+    type: 'bigint',
+  })
+  schoolId: number;
 
   @Column({
     name: 'first_name',
@@ -58,6 +67,12 @@ export class Teacher {
   })
   phone: string;
 
+  @Column({
+    name: 'date_of_birth',
+    type: 'date',
+  })
+  dateOfBirth: Date;
+
   @Index('email', { unique: true })
   @Column({
     name: 'email',
@@ -76,4 +91,10 @@ export class Teacher {
     type: 'varchar',
   })
   updatedAt: Date;
+
+  // relations
+
+  @ManyToOne(() => School, (school) => school.teacher)
+  @JoinColumn({ name: 'school_id' })
+  school: School;
 }

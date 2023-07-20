@@ -13,7 +13,7 @@ export class SubjectService {
   ) {}
 
   public async addSubject(subject: AddSubjectDto) {
-    const existingSubject = await this.subjectRepo.findBy({
+    const existingSubject = await this.subjectRepo.findOneBy({
       name: subject.name,
       level: subject.level,
     });
@@ -24,5 +24,9 @@ export class SubjectService {
   public async updateSubject(id: number, subject: UpdateSubjectDto) {
     await this.subjectRepo.update(id, subject);
     return 'Updated successfully';
+  }
+
+  public async getAllSubject() {
+    return await this.subjectRepo.find();
   }
 }

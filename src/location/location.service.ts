@@ -30,7 +30,7 @@ export class LocationService {
       return { message: 'Location already added' };
     }
     const locationAdded = await this.locationRepository.save(locationDto);
-    if (locationAdded) return { message: 'Location added' };
+    if (locationAdded) return {locationAdded, message: 'Location added' };
   }
 
   getLocationById(id: number) {

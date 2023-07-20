@@ -14,7 +14,7 @@ export class SchoolService {
 
   async fetchSchool() {
     const schools = await this.schoolRepository.find({
-      relations: ['location'],
+      relations: ['location', 'user'],
     });
     return schools;
   }

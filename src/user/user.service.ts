@@ -29,7 +29,7 @@ export class UserService {
     };
   }
 
-  async signUp(userDto: userDto) {
+  async createUser(userDto: userDto) {
     const passwordHash = await bcrypt.hash(userDto.password, 10);
     const newUser = {
       password: passwordHash,

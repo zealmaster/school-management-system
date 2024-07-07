@@ -9,7 +9,7 @@ import { Student } from 'src/entity/student.entity';
 import { FeesRecord } from 'src/entity/fees-record.entity';
 import { Fees } from 'src/entity/fees.entity';
 import { FeesReceipt } from 'src/entity/fees-receipt.entity';
-import { FeesService } from 'src/fees/fees.service';
+import { FeesService } from 'src/modules/fees/fees.service';
 
 
 

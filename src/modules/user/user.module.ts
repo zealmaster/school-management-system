@@ -4,8 +4,8 @@ import { UserController } from './user.controller';
 import { User } from 'src/entity/user.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from 'src/auth/constants';
-import { EmailModule } from 'src/email/email.module';
+import { jwtConstants } from 'src/modules/auth/constants';
+import { EmailModule } from 'src/modules/email/email.module';
 import { Verification } from 'src/entity/verification.entity';
 
 @Module({

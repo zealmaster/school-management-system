@@ -1,8 +1,8 @@
 import { Controller, Post, Get, UseGuards, Body } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { FeesService } from './fees.service';
-import { AddFeesDto } from 'src/fees/dto/addfees.dto';
-import { FeesPaymentDto } from 'src/fees/dto/feesRecords.dto';
+import { AddFeesDto } from 'src/modules/fees/dto/addfees.dto';
+import { FeesPaymentDto } from 'src/modules/fees/dto/feesRecords.dto';
 import { Fees } from 'src/entity/fees.entity';
 
 @Controller('fees')

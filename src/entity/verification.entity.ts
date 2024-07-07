@@ -1,4 +1,4 @@
-import { token } from 'src/email/email.service';
+import { token } from 'src/modules/email/email.service';
 import {
   Column,
   CreateDateColumn,

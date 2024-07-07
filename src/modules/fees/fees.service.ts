@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AddFeesDto } from 'src/fees/dto/addfees.dto';
-import { FeesPaymentDto } from 'src/fees/dto/feesRecords.dto';
-import { UpdateFeesDto } from 'src/fees/dto/updateFess.dto';
+import { AddFeesDto } from 'src/modules/fees/dto/addfees.dto';
+import { FeesPaymentDto } from 'src/modules/fees/dto/feesRecords.dto';
+import { UpdateFeesDto } from 'src/modules/fees/dto/updateFess.dto';
 import { FeesRecord } from 'src/entity/fees-record.entity';
 import { Fees } from 'src/entity/fees.entity';
 import { Repository } from 'typeorm';

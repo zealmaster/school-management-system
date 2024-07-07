@@ -13,7 +13,7 @@ import {
 } from '@nestjs/common';
 import { SchoolService } from './school.service';
 import { SchoolDto } from './dto/school.dto';
-import { School } from '../entity/school.entity';
+import { School } from '../../entity/school.entity';
 import { UpdateSchoolDto } from './dto/updateSchool.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';

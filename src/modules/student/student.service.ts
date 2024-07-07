@@ -1,12 +1,12 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AddStudentDto } from 'src/student/dto/addStudent.dto';
+import { AddStudentDto } from 'src/modules/student/dto/addStudent.dto';
 import { StudentLoginDto } from 'src/dto/studentLoginDto';
-import { UpdateStudentDto } from 'src/student/dto/updateStudent.dto';
+import { UpdateStudentDto } from 'src/modules/student/dto/updateStudent.dto';
 import { FeesRecord } from 'src/entity/fees-record.entity';
 import { Student } from 'src/entity/student.entity';
 import { StudentLogin } from 'src/entity/studentLogin.entity';
-import { FEES_STATUS, FeesService } from 'src/fees/fees.service';
+import { FEES_STATUS, FeesService } from 'src/modules/fees/fees.service';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { generatePassword } from 'src/strings';

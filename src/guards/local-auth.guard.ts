@@ -6,7 +6,7 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { Observable } from 'rxjs';
-import { AuthService } from 'src/auth/auth.service';
+import { AuthService } from 'src/modules/auth/auth.service';
 
 @Injectable()
 export class LocalAuthGuard extends AuthGuard('local') {

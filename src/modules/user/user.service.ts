@@ -5,9 +5,9 @@ import { User } from 'src/entity/user.entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { JwtService } from '@nestjs/jwt';
-import { EmailService } from 'src/email/email.service';
+import { EmailService } from 'src/modules/email/email.service';
 import { Verification } from 'src/entity/verification.entity';
-import { token } from 'src/email/email.service';
+import { token } from 'src/modules/email/email.service';
 import { CreateUserDto } from './dto/user.dto';
 
 @Injectable()

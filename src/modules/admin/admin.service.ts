@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateAdminDto } from 'src/admin/dto/createAdmin.dto';
+import { CreateAdminDto } from 'src/modules/admin/dto/createAdmin.dto';
 import { Admin } from 'src/entity/admin.entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';

@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AddSubjectDto } from 'src/dto/addSubject.dto';
-import { UpdateSubjectDto } from 'src/dto/updateSubject.dto';
+import { AddSubjectDto } from './dto/addSubject.dto';
+import { UpdateSubjectDto } from './dto/updateSubject.dto';
 import { Subject } from 'src/entity/subject.entity';
 import { Repository } from 'typeorm';
 

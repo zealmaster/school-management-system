@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { userDto } from 'src/user/user.dto';
+import { CreateUserDto } from '../user/dto/user.dto';
 import * as nodemailer from 'nodemailer';
 import * as dotenv from 'dotenv';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -19,7 +19,7 @@ export class EmailService {
     private userRepo: Repository<User>,
   ) {}
 
-  async sendUserConfirmation(user: userDto) {
+  async sendUserConfirmation(user: CreateUserDto) {
     const transporter = nodemailer.createTransport({
       host: process.env.EMAIL_HOST,
       port: Number(process.env.EMAIL_PORT),

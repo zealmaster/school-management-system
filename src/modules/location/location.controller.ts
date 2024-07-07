@@ -8,7 +8,7 @@ import {
   Param,
   ParseIntPipe,
 } from '@nestjs/common';
-import { locationDto } from 'src/dto/location.dto';
+import { LocationDto } from './dto/location.dto';
 import { LocationService } from './location.service';
 
 @Controller('location')
@@ -22,7 +22,7 @@ export class LocationController {
   }
   @Post()
   @UsePipes(ValidationPipe)
-  async addLocation(@Body() locationDto: locationDto) {
+  async addLocation(@Body() locationDto: LocationDto) {
     return await this.locationService.createLocation(locationDto);
   }
   @Get(':id')

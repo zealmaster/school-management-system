@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { locationDto } from 'src/dto/location.dto';
+import { LocationDto } from './dto/location.dto';
 import { City } from 'src/entity/city.entity';
 import { Location } from 'src/entity/location.entity';
 import { State } from 'src/entity/state.entity';
@@ -21,7 +21,7 @@ export class LocationService {
     return this.locationRepository.find({ relations: ['schools'] });
   }
 
-  async createLocation(locationDto: locationDto) {
+  async createLocation(locationDto: LocationDto) {
     const existingLocation = await this.locationRepository.findOneBy({
       location: locationDto.location,
       state: locationDto.state,

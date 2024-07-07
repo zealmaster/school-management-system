@@ -22,7 +22,7 @@ import { UpdateStudentDto } from 'src/modules/student/dto/updateStudent.dto';
 import { Express } from 'express';
 import { diskStorage } from 'multer';
 import * as path from 'path';
-import { StudentLoginDto } from 'src/dto/studentLoginDto';
+import { StudentLoginDto } from './dto/studentLoginDto';
 
 
 const storage = diskStorage({

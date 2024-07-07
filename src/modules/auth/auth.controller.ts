@@ -34,6 +34,6 @@ export class AuthController {
     if (!user) {
       return { success: false, msg: 'Invalid authentication code' };
     }
-    return { user, success: true };
+    return user
   }
 }

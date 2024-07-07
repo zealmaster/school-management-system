@@ -16,10 +16,7 @@ export class AuthService {
 
   signJWT(user: Partial<User>) {
     const payload = { email: user.email, sub: user.id, name: user.username };
-    return {
-      access_token: this.jwtService.sign(payload),
-      ...user,
-    };
+    return this.jwtService.sign(payload);
   }
 
   async validateUser(email: string, password: string): Promise<any> {

@@ -6,11 +6,11 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from 'src/modules/auth/constants';
 import { EmailModule } from 'src/modules/email/email.module';
-import { Verification } from 'src/entity/verification.entity';
+import { TwoFa } from 'src/entity/verification.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([User, Verification]),
+    TypeOrmModule.forFeature([User, TwoFa]),
     JwtModule.register({ secret: jwtConstants.secret }),
     EmailModule,
   ],

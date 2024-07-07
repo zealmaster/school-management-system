@@ -18,13 +18,12 @@ import { UpdateSchoolDto } from './dto/updateSchool.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
 
-
 @Controller('school')
 export class SchoolController {
   constructor(private schoolService: SchoolService) {}
 
   // School Dashboard
- 
+
   @Post('upload')
   @UseInterceptors(FileInterceptor('passportPicture'))
   async upload(@UploadedFile() file) {

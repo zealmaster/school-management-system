@@ -24,7 +24,6 @@ import { diskStorage } from 'multer';
 import * as path from 'path';
 import { StudentLoginDto } from './dto/studentLoginDto';
 
-
 const storage = diskStorage({
   destination: function (req, file, cb) {
     cb(null, './public/images/students');
@@ -79,9 +78,9 @@ export class StudentController {
     return await this.studentService.getAllStudents();
   }
 
-//Student action
+  //Student action
   @Post('login')
   async loginStudent(@Body() login: StudentLoginDto) {
     return await this.studentService.loginStudent(login);
-}
+  }
 }

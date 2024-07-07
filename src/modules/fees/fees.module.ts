@@ -12,5 +12,4 @@ import { FeesReceipt } from 'src/entity/fees-receipt.entity';
   exports: [FeesService],
   imports: [TypeOrmModule.forFeature([Fees, FeesRecord, FeesReceipt])],
 })
-
 export class FeesModule {}

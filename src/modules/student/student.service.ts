@@ -11,8 +11,6 @@ import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { generatePassword } from 'src/strings';
 
-
-
 @Injectable()
 export class StudentService {
   constructor(

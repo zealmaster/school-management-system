@@ -8,6 +8,7 @@ import { User } from 'src/entity/user.entity';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { JwtStrategy } from './jwt.strategy';
+import { EmailModule } from '../email/email.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { JwtStrategy } from './jwt.strategy';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '24h' },
     }),
+    EmailModule
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
   controllers: [AuthController],

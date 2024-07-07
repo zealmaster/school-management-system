@@ -3,7 +3,7 @@ import { IsDate, IsNumber, IsOptional, IsString } from 'class-validator';
 export class AddTeacherDto {
   @IsString()
   firstName: string;
- 
+
   @IsString()
   @IsOptional()
   title: string;
@@ -32,5 +32,4 @@ export class AddTeacherDto {
 
   @IsString()
   email: string;
-
 }

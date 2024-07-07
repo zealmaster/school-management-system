@@ -34,5 +34,4 @@ export class SchoolService {
     const newSchool = this.schoolRepository.create(schoolDto);
     return this.schoolRepository.save(newSchool);
   }
-
 }

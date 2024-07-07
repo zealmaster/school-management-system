@@ -1,4 +1,13 @@
-import { Body, Controller, Get, Post, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Post,
+  Put,
+  UseGuards,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { TeacherService } from './teacher.service';
 import { AddTeacherDto } from 'src/modules/teacher/dto/addTeacher.dto';
 import { AuthGuard } from '@nestjs/passport';

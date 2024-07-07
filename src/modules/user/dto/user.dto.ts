@@ -2,11 +2,11 @@ import { IsNotEmpty, Length } from 'class-validator';
 export class CreateUserDto {
   @IsNotEmpty()
   @Length(3, 255)
-  first_name: string;
+  firstName: string;
 
   @IsNotEmpty()
   @Length(3, 255)
-  last_name: string;
+  lastName: string;
 
   @IsNotEmpty()
   @Length(3, 255)
@@ -18,5 +18,4 @@ export class CreateUserDto {
 
   @IsNotEmpty()
   password: string;
-
 }

@@ -3,7 +3,7 @@ import { LoginDto } from './dto/login.dto';
 import { CreateUserDto } from './dto/user.dto';
 import { UserService } from './user.service';
 
-@Controller('users')
+@Controller('user')
 export class UserController {
   constructor(private userService: UserService) {}
 
@@ -11,13 +11,9 @@ export class UserController {
   async fetchUsers() {
     return await this.userService.fetchUsers();
   }
-  @Post('signup')
+  @Post('register')
   signUp(@Body() userDto: CreateUserDto) {
     return this.userService.createUser(userDto);
   }
 
-  @Post('login')
-  async login(@Body() loginDto: LoginDto) {
-    return await this.userService.login(loginDto);
-  }
 }

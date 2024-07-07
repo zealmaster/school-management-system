@@ -89,11 +89,11 @@ export class FeesService {
       studentId,
       level: feesPayment.level,
     });
-    if (!paid){
+    if (!paid) {
       return "This fee record does not exist! Check student's information provided and try again.";
     }
     const amountPaid = Number(paid.amountPaid) + amount;
-    if (amountPaid > paid.totalFees){
+    if (amountPaid > paid.totalFees) {
       return `The total fees is ${
         paid.totalFees
       }. You are paying in excess of ${amountPaid - paid.totalFees}`;
@@ -121,6 +121,6 @@ export class FeesService {
       transactionReference: receipt_reference_no,
       level: paid.level,
     });
-    return feesPaid
+    return feesPaid;
   }
 }

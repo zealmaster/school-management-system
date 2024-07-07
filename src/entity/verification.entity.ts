@@ -1,13 +1,14 @@
-import { token } from 'src/modules/email/email.service';
+import { code } from 'src/modules/email/email.service';
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity('verification_code')
-export class Verification {
+@Entity('two_fa_codes')
+export class TwoFa extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -18,14 +19,23 @@ export class Verification {
   userId: number;
 
   @Column({
-    name: 'token',
+    name: 'two_fa_code',
     type: 'varchar',
   })
-  token: string;
+  twoFaCode: string;
 
   @CreateDateColumn({
     name: 'created_at',
     type: 'date',
   })
   createdAt: Date;
+
+  // Constructor
+  constructor(data: { userId: number; twoFaCode: string }) {
+    super();
+    if (!data) return;
+
+    this.userId = data.userId;
+    this.twoFaCode = data.twoFaCode;
+  }
 }

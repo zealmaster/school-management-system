@@ -19,7 +19,7 @@ export class FeesReceipt {
     type: 'bigint',
   })
   studentId: number;
-  
+
   @Column({
     name: 'level',
     type: 'varchar',
@@ -34,7 +34,7 @@ export class FeesReceipt {
 
   @Column({
     name: 'transaction_reference',
-    type: 'varchar'
+    type: 'varchar',
   })
   transactionReference: string;
 

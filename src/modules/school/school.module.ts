@@ -11,8 +11,6 @@ import { Fees } from 'src/entity/fees.entity';
 import { FeesReceipt } from 'src/entity/fees-receipt.entity';
 import { FeesService } from 'src/modules/fees/fees.service';
 
-
-
 @Module({
   imports: [
     TypeOrmModule.forFeature([

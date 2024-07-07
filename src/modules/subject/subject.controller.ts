@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Param,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { SubjectService } from './subject.service';
 import { AuthGuard } from '@nestjs/passport';
 import { AddSubjectDto } from './dto/addSubject.dto';
@@ -22,7 +30,7 @@ export class SubjectController {
   ) {
     return await this.subjectService.updateSubject(id, subject);
   }
-  
+
   @Get('all-subjects')
   async getAllSubjects() {
     return await this.subjectService.getAllSubject();

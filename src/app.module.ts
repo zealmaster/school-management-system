@@ -17,7 +17,6 @@ import { SubjectModule } from './modules/subject/subject.module';
 import { StudentModule } from './modules/student/student.module';
 import { PaymentModule } from './modules/payment/payment.module';
 
-
 @Module({
   imports: [
     SchoolModule,

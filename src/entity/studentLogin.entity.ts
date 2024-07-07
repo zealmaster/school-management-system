@@ -26,7 +26,7 @@ export class StudentLogin {
     type: 'varchar',
   })
   password: string;
-  
+
   @Column({
     name: 'password_temp',
     type: 'varchar',
@@ -35,7 +35,7 @@ export class StudentLogin {
 
   @CreateDateColumn({
     name: 'created_at',
-    type: 'datetime'
+    type: 'datetime',
   })
   createdAt: Date;
 

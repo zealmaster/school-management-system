@@ -3,7 +3,7 @@ import { EmailService } from './email.service';
 import { EmailController } from './email.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import * as dotenv from 'dotenv';
-import { Verification } from 'src/entity/verification.entity';
+import { TwoFa } from 'src/entity/verification.entity';
 import { User } from 'src/entity/user.entity';
 dotenv.config();
 
@@ -11,6 +11,6 @@ dotenv.config();
   providers: [EmailService],
   controllers: [EmailController],
   exports: [EmailService],
-  imports: [TypeOrmModule.forFeature([Verification, User])],
+  imports: [TypeOrmModule.forFeature([TwoFa, User])],
 })
 export class EmailModule {}

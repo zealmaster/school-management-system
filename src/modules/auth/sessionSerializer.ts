@@ -5,7 +5,7 @@ import { UserService } from 'src/modules/user/user.service';
 
 export class SessionSerializer extends PassportSerializer {
   constructor(
-    @Inject('USER_SERVICE') private readonly userService: UserService
+    @Inject('USER_SERVICE') private readonly userService: UserService,
   ) {
     super();
   }
@@ -14,7 +14,7 @@ export class SessionSerializer extends PassportSerializer {
   }
 
   async deserializeUser(user: User, done: (err, user: User) => void) {
-    const USERID = await this.userService.findUser(user.id);
+    const USERID = await this.userService.findUserById(user.id);
     return USERID ? done(null, USERID) : done(null, null);
   }
 }

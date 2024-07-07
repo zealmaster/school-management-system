@@ -1,9 +1,12 @@
 import { IsNotEmpty, Length } from 'class-validator';
 
-export class LocationDto {
+export class LoginDto {
   @IsNotEmpty()
-  location: string;
+  @Length(3)
+  email: string;
 
   @IsNotEmpty()
-  state: string;
+  @Length(3)
+  password: string;
+  
 }

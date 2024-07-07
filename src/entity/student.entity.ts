@@ -79,19 +79,19 @@ export class Student {
 
   @Column({
     name: 'student_id',
-    type: 'varchar'
+    type: 'varchar',
   })
   studentId: string;
 
   @Column({
     name: 'admission_year',
-    type: 'year'
+    type: 'year',
   })
   admissionYear: Date;
 
   @Column({
     name: 'admission_session',
-    type: 'varchar'
+    type: 'varchar',
   })
   admissionSession: string;
 

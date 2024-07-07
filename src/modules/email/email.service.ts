@@ -50,7 +50,7 @@ export class EmailService {
     try {
       const verifyCode = await this.verificationRepo.findOneBy({ twoFaCode: code });
       if (verifyCode) {
-        await this.verificationRepo.delete({ twoFaCode: code });
+        await this.verificationRepo.delete({ id: verifyCode.id });
         await this.userRepo.update(verifyCode?.userId, { verifiedEmail: 1 });
         return {success: true, message: 'Email confirmed'};
       } else {
@@ -65,8 +65,9 @@ export class EmailService {
   public async confirmTwoFaCode(userId: number, code: string) {
     try {
       const verifyCode = await this.verificationRepo.findOneBy({ userId, twoFaCode: code });
+      console.log(verifyCode)
       if (verifyCode) {
-        await this.verificationRepo.delete({ twoFaCode: code });
+        await this.verificationRepo.delete({ id: verifyCode.id });
         return true;
       } else {
         return false;

@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { userDto } from 'src/dto/user.dto';
+import { userDto } from 'src/user/user.dto';
 import * as nodemailer from 'nodemailer';
 import * as dotenv from 'dotenv';
 import { InjectRepository } from '@nestjs/typeorm';

@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { AddStudentDto } from 'src/dto/addStudent.dto';
+import { AddStudentDto } from 'src/student/dto/addStudent.dto';
 import { StudentLoginDto } from 'src/dto/studentLoginDto';
-import { UpdateStudentDto } from 'src/dto/updateStudent.dto';
+import { UpdateStudentDto } from 'src/student/dto/updateStudent.dto';
 import { FeesRecord } from 'src/entity/fees-record.entity';
 import { Student } from 'src/entity/student.entity';
 import { StudentLogin } from 'src/entity/studentLogin.entity';

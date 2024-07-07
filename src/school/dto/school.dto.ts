@@ -1,5 +1,5 @@
 import { IsNotEmpty, IsNumber, Length } from 'class-validator';
-export class schoolDto {
+export class SchoolDto {
   @IsNotEmpty()
   @Length(3, 255)
   name: string;

@@ -28,24 +28,4 @@ export class AuthService {
     return user;
   }
 
-  // For Jwt-strategy
-  async loginUser(user: any) {
-    return user;
-    // if (user) {
-    //   return (
-    //     user.username +
-    //     ',You are successfully logged in. You can now add your school details.'
-    //   );
-    // }
-    // const payload = {
-    //   user: {
-    //     id: user.user.id,
-    //     email: user.user.email,
-    //     name: user.user.username,
-    //   },
-    // };
-    // return await {
-    //   access_token: this.jwtService.sign(payload),
-    // };
-  }
 }

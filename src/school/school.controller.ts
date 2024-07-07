@@ -12,9 +12,9 @@ import {
   UploadedFile,
 } from '@nestjs/common';
 import { SchoolService } from './school.service';
-import { schoolDto } from '../dto/school.dto';
+import { SchoolDto } from './dto/school.dto';
 import { School } from '../entity/school.entity';
-import { UpdateSchoolDto } from '../dto/updateSchool.dto';
+import { UpdateSchoolDto } from './dto/updateSchool.dto';
 import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
 
@@ -62,7 +62,7 @@ export class SchoolController {
   }
   @Post()
   @UseGuards(AuthGuard('jwt'))
-  async addSchool(@Body() schoolData: schoolDto): Promise<School> {
+  async addSchool(@Body() schoolData: SchoolDto): Promise<School> {
     return await this.schoolService.addSchool(schoolData);
   }
 }

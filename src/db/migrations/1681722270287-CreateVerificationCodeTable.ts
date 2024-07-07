@@ -5,7 +5,7 @@ export class CreateVerificationCodeTable1681722270287
 {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
-      `CREATE TABLE verification_code (
+      `CREATE TABLE verification_codes (
         id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT, 
         user_id BIGINT UNSIGNED, 
         token VARCHAR(100), 

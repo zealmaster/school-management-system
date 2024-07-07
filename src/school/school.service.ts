@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { schoolDto } from 'src/dto/school.dto';
-import { UpdateSchoolDto } from 'src/dto/updateSchool.dto';
+import { SchoolDto } from 'src/school/dto/school.dto';
+import { UpdateSchoolDto } from 'src/school/dto/updateSchool.dto';
 import { School } from 'src/entity/school.entity';
 import { Repository } from 'typeorm';
 
@@ -30,7 +30,7 @@ export class SchoolService {
     return this.schoolRepository.delete(id);
   }
 
-  addSchool(schoolDto: schoolDto) {
+  addSchool(schoolDto: SchoolDto) {
     const newSchool = this.schoolRepository.create(schoolDto);
     return this.schoolRepository.save(newSchool);
   }

@@ -16,9 +16,9 @@ import {
 } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { AddStudentDto } from 'src/dto/addStudent.dto';
+import { AddStudentDto } from 'src/student/dto/addStudent.dto';
 import { StudentService } from './student.service';
-import { UpdateStudentDto } from 'src/dto/updateStudent.dto';
+import { UpdateStudentDto } from 'src/student/dto/updateStudent.dto';
 import { Express } from 'express';
 import { diskStorage } from 'multer';
 import * as path from 'path';

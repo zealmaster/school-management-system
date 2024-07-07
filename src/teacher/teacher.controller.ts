@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { TeacherService } from './teacher.service';
-import { AddTeacherDto } from 'src/dto/addTeacher.dto';
+import { AddTeacherDto } from 'src/teacher/dto/addTeacher.dto';
 import { AuthGuard } from '@nestjs/passport';
 
 @Controller('teacher')

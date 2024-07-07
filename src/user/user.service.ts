@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { loginDto } from 'src/dto/login.dto';
-import { userDto } from 'src/dto/user.dto';
+import { LoginDto } from './dto/login.dto';
 import { User } from 'src/entity/user.entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
@@ -9,6 +8,7 @@ import { JwtService } from '@nestjs/jwt';
 import { EmailService } from 'src/email/email.service';
 import { Verification } from 'src/entity/verification.entity';
 import { token } from 'src/email/email.service';
+import { CreateUserDto } from './dto/user.dto';
 
 @Injectable()
 export class UserService {
@@ -29,7 +29,7 @@ export class UserService {
     };
   }
 
-  async createUser(userDto: userDto) {
+  async createUser(userDto: CreateUserDto) {
     const passwordHash = await bcrypt.hash(userDto.password, 10);
     const newUser = {
       password: passwordHash,
@@ -52,7 +52,7 @@ export class UserService {
   }
 
   // User login handler without Passport module
-  async login(loginDto: loginDto) {
+  async login(loginDto: LoginDto) {
     const user = await this.userRepository.findOneBy({
       username: loginDto.username,
     });

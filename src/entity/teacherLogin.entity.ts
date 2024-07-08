@@ -1,4 +1,5 @@
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
@@ -7,7 +8,7 @@ import {
 } from 'typeorm';
 
 @Entity('teacher_logins')
-export class TeacherLogin {
+export class TeacherLogin extends BaseEntity {
   @PrimaryGeneratedColumn({
     name: 'id',
     type: 'bigint',
@@ -44,4 +45,13 @@ export class TeacherLogin {
     type: 'datetime',
   })
   loginAt: Date;
+  
+    // constructor
+    constructor(data: { teacherId: number; password: string }) {
+      super();
+      if (!data) return;
+      this.teacherId = data.teacherId;
+      this.password = data.password;
+    }
+  
 }

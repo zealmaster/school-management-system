@@ -1,16 +1,18 @@
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { School } from './school.entity';
 
 @Entity('students')
-export class Student {
+export class Student extends BaseEntity {
   @PrimaryGeneratedColumn({
     name: 'id',
     type: 'bigint',
@@ -78,20 +80,20 @@ export class Student {
   parentPhone: string;
 
   @Column({
-    name: 'student_id',
-    type: 'varchar'
+    name: 'student_indentification_number',
+    type: 'varchar',
   })
-  studentId: string;
+  studentIdentificationNumber: string;
 
   @Column({
     name: 'admission_year',
-    type: 'year'
+    type: 'year',
   })
   admissionYear: Date;
 
   @Column({
     name: 'admission_session',
-    type: 'varchar'
+    type: 'varchar',
   })
   admissionSession: string;
 
@@ -121,7 +123,44 @@ export class Student {
 
   // Relations
 
-  @ManyToOne(() => School, (school) => school.students)
+  @OneToOne(() => School, (school) => school.students)
   @JoinColumn({ name: 'school_id' })
   school: School;
+
+  // constructor
+  constructor(data: {
+    schoolId: number;
+    firstName: string;
+    lastName: string;
+    middleName: string;
+    dateOfBirth: Date;
+    level: string;
+    sex: string;
+    address: string;
+    parentName: string;
+    parentPhone: string;
+    studentIdentificationNumber: string;
+    admissionYear: Date;
+    admissionSession: string;
+    graduationYear: Date;
+    graduationSession: string;
+  }) {
+    super();
+    if (!data) return;
+    this.schoolId = data.schoolId;
+    this.firstName = data.firstName;
+    this.lastName = data.lastName;
+    this.middleName = data.middleName;
+    this.dateOfBirth = data.dateOfBirth;
+    this.level = data.level;
+    this.sex = data.sex;
+    this.address = data.address;
+    this.parentName = data.parentName;
+    this.parentPhone = data.parentPhone;
+    this.studentIdentificationNumber = data.studentIdentificationNumber;
+    this.admissionYear = data.admissionYear;
+    this.admissionSession = data.admissionSession;
+    this.graduationYear = data.graduationYear;
+    this.graduationSession = data.graduationSession;
+  }
 }

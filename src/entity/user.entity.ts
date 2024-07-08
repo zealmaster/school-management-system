@@ -1,4 +1,5 @@
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
@@ -9,7 +10,7 @@ import {
 import { School } from './school.entity';
 
 @Entity('users')
-export class User {
+export class User extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -17,10 +18,10 @@ export class User {
   username: string;
 
   @Column()
-  first_name: string;
+  firstName: string;
 
   @Column()
-  last_name: string;
+  lastName: string;
 
   @Column()
   email: string;
@@ -52,4 +53,21 @@ export class User {
 
   @OneToMany(() => School, (school) => school.user)
   school: School[];
+
+  // constructor
+  constructor(data: {
+    username: string;
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+  }) {
+    super();
+    if (!data) return;
+    this.username = data.username;
+    this.firstName = data.firstName;
+    this.lastName = data.lastName;
+    this.email = data.email;
+    this.password = data.password;
+  }
 }

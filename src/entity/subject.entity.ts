@@ -1,4 +1,5 @@
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
@@ -7,7 +8,7 @@ import {
 } from 'typeorm';
 
 @Entity('subjects')
-export class Subject {
+export class Subject extends BaseEntity {
   @PrimaryGeneratedColumn({
     name: 'id',
     type: 'bigint',
@@ -56,4 +57,20 @@ export class Subject {
     type: 'varchar',
   })
   updatedAt: Date;
+
+  // constructor
+  constructor(data: {
+    schoolId: number;
+    name: string;
+    level: string;
+    teacherId: number;
+    session: string;
+  }) {
+    super();
+    if (!data) return;
+    this.schoolId = data.schoolId;
+    this.level = data.level;
+    this.teacherId = data.teacherId;
+    this.session = data.session;
+  }
 }

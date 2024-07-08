@@ -5,10 +5,10 @@ export class CreateVerificationCodeTable1681722270287
 {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.query(
-      `CREATE TABLE verification_code (
+      `CREATE TABLE two_fa_codes (
         id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT, 
         user_id BIGINT UNSIGNED, 
-        token VARCHAR(100), 
+        two_fa_code VARCHAR(100), 
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP
     )`,
     );

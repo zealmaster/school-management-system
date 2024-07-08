@@ -91,8 +91,8 @@ export class UserService {
         const userDetail = {
           id: users[i].id,
           username: users[i].username,
-          firstName: users[i].first_name,
-          lastName: users[i].last_name,
+          firstName: users[i].firstName,
+          lastName: users[i].lastName,
           email: users[i].email,
           createdAt: users[i].createdAt,
           updatedAt: users[i].updatedAt,

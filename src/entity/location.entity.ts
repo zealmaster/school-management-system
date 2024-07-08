@@ -1,4 +1,5 @@
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
@@ -9,7 +10,7 @@ import {
 import { School } from './school.entity';
 
 @Entity('locations')
-export class Location {
+export class Location extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -31,6 +32,15 @@ export class Location {
   })
   updatedAt: Date;
 
+  // relations
   @OneToMany(() => School, (school) => school.location)
   schools: School[];
+
+  // constructor
+  constructor(data: { location: string; state: string }) {
+    super();
+    if (!data) return;
+    this.location = data.location;
+    this.state = data.state;
+  }
 }

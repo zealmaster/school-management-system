@@ -32,7 +32,7 @@ export class AdminService {
       password: passwordHash,
       email: addAdmin.email,
     };
-    const adminAdded = await this.adminRepo.save(newAdmin);
+    const adminAdded = await this.adminRepo.save(new Admin(newAdmin));
     return adminAdded;
   }
 

@@ -1,4 +1,5 @@
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
@@ -7,7 +8,7 @@ import {
 } from 'typeorm';
 
 @Entity('city')
-export class City {
+export class City extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -19,4 +20,11 @@ export class City {
 
   @UpdateDateColumn()
   updatedAt: Date;
+
+  // constructor
+  constructor(data: { name: string }) {
+    super();
+    if (!data) return;
+    this.name = data.name;
+  }
 }

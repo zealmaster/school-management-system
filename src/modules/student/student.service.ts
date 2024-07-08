@@ -26,7 +26,7 @@ export class StudentService {
   // School admin dashboard
   async addStudent(student: AddStudentDto) {
     const existingStudent = await this.studentRepo.findOneBy({
-      studentId: student.studentId,
+      id: student.studentId,
       schoolId: student.schoolId,
     });
     if (existingStudent) {
@@ -39,7 +39,7 @@ export class StudentService {
     );
     const password = await bcrypt.hash(generatePassword, 10);
     const studentLogin = await this.studentLoginRepo.save({
-      studentId: student.studentId,
+      // studentId: student.studentId,
       password: password,
       passwordTemp: generatePassword,
     });

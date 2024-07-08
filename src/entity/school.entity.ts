@@ -1,10 +1,12 @@
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -12,9 +14,10 @@ import { Location } from './location.entity';
 import { User } from './user.entity';
 import { Student } from './student.entity';
 import { Teacher } from './teacher.entity';
+import { SchoolType } from './school-type.entity';
 
 @Entity('schools')
-export class School {
+export class School extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
@@ -56,9 +59,27 @@ export class School {
   @JoinColumn({ name: 'user_id' })
   user: User;
 
-  @OneToMany(() => Student, (student) => student.school)
+  @OneToOne(() => Student, (student) => student.school)
   students: Student;
 
   @OneToMany(() => Teacher, (teacher) => teacher.school)
   teacher: Teacher[];
+
+  // @OneToOne(() => SchoolType)
+  // schoolType: SchoolType;
+
+  // constructor
+  constructor(data: {
+    userId: number;
+    locationId: number;
+    name: string;
+    address: string;
+  }) {
+    super();
+    if (!data) return;
+    this.userId = data.userId;
+    this.locationId = data.locationId;
+    this.name = data.name;
+    this.address = data.address;
+  }
 }

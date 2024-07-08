@@ -4,8 +4,8 @@ export class AddStudentDto {
   @IsNumber()
   schoolId: number;
 
-  @IsString()
-  studentId: string;
+  @IsNumber()
+  studentId: number;
 
   @IsString()
   firstName: string;

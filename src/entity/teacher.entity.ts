@@ -1,4 +1,5 @@
 import {
+  BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
@@ -11,7 +12,7 @@ import {
 import { School } from './school.entity';
 
 @Entity('teachers')
-export class Teacher {
+export class Teacher extends BaseEntity {
   @PrimaryGeneratedColumn({
     name: 'id',
     type: 'bigint',
@@ -26,16 +27,16 @@ export class Teacher {
   schoolId: number;
 
   @Column({
-    name: 'first_name',
-    type: 'varchar',
-  })
-  firstName: string;
-
-  @Column({
     name: 'title',
     type: 'varchar',
   })
   title: string;
+
+  @Column({
+    name: 'first_name',
+    type: 'varchar',
+  })
+  firstName: string;
 
   @Column({
     name: 'last_name',
@@ -97,4 +98,32 @@ export class Teacher {
   @ManyToOne(() => School, (school) => school.teacher)
   @JoinColumn({ name: 'school_id' })
   school: School;
+
+  // constructor
+  constructor(data: {
+    schoolId: number;
+    title: string;
+    firstName: string;
+    lastName: string;
+    middleName: string;
+    dateOfBirth: Date;
+    level: string;
+    sex: string;
+    address: string;
+    phone: string;
+    email: string;
+  }) {
+    super();
+    if (!data) return;
+    this.schoolId = data.schoolId;
+    this.title = data.title;
+    this.firstName = data.firstName;
+    this.lastName = data.lastName;
+    this.middleName = data.middleName;
+    this.dateOfBirth = data.dateOfBirth;
+    this.sex = data.sex;
+    this.address = data.address;
+    this.email = data.email;
+    this.phone = data.phone;
+  }
 }

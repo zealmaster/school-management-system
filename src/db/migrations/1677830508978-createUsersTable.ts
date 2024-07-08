@@ -8,7 +8,7 @@ export class createUsersTable1677830508978 implements MigrationInterface {
         username VARCHAR(200),
         first_name VARCHAR(200),
         last_name VARCHAR(200),
-        email VARCHAR(255),
+        email VARCHAR(255) UNIQUE,
         password VARCHAR(100),
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         updated_at DATETIME DEFAULT CURRENT_TIMESTAMP)`,

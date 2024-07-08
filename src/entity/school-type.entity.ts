@@ -3,10 +3,15 @@ import { School } from './school.entity';
 
 @Entity('school-type')
 export class SchoolType extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({
+    type: 'bigint',
+    unsigned: true,
+  })
   id: number;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+  })
   type: string;
 
   @CreateDateColumn({

@@ -9,16 +9,29 @@ import {
 
 @Entity('state')
 export class State extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({
+    type: 'bigint',
+    unsigned: true,
+  })
   id: number;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+  })
   name: string;
 
-  @CreateDateColumn()
+  @CreateDateColumn({
+    type: 'datetime',
+    name: 'created_at',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   createAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({
+    type: 'datetime',
+    name: 'updated_at',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
   updatedAt: Date;
 
   // constructor

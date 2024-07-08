@@ -11,24 +11,33 @@ import { School } from './school.entity';
 
 @Entity('locations')
 export class Location extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({
+    type: 'bigint',
+    unsigned: true,
+  })
   id: number;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+  })
   location: string;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+  })
   state: string;
 
   @CreateDateColumn({
-    type: 'date',
+    type: 'datetime',
     name: 'created_at',
+    default: () => 'CURRENT_TIMESTAMP',
   })
   createdAt: Date;
 
   @UpdateDateColumn({
-    type: 'date',
+    type: 'datetime',
     name: 'updated_at',
+    default: () => 'CURRENT_TIMESTAMP',
   })
   updatedAt: Date;
 

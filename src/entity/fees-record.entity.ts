@@ -66,12 +66,14 @@ export class FeesRecord extends BaseEntity {
   @CreateDateColumn({
     name: 'created_at',
     type: 'datetime',
+    default: () => 'CURRENT_TIMESTAMP',
   })
   createdAt: Date;
 
   @UpdateDateColumn({
     name: 'updated_at',
     type: 'datetime',
+    default: () => 'CURRENT_TIMESTAMP',
   })
   updatedAt: Date;
 

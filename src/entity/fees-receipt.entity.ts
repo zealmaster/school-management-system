@@ -42,6 +42,7 @@ export class FeesReceipt extends BaseEntity {
   @CreateDateColumn({
     name: 'created_at',
     type: 'datetime',
+    default: () => 'CURRENT_TIMESTAMP',
   })
   createdAt: Date;
 

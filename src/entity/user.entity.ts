@@ -11,19 +11,32 @@ import { School } from './school.entity';
 
 @Entity('users')
 export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({
+    type: 'bigint',
+    unsigned: true,
+  })
   id: number;
 
-  @Column()
+  @Column({
+    type: 'varchar'
+  })
   username: string;
 
-  @Column()
+  @Column({
+    name: 'first_name',
+    type: 'varchar',
+  })
   firstName: string;
 
-  @Column()
+  @Column({
+    name: 'last_name',
+    type: 'varchar',
+  })
   lastName: string;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+  })
   email: string;
 
   @Column({
@@ -40,14 +53,16 @@ export class User extends BaseEntity {
   password: string;
 
   @CreateDateColumn({
-    type: 'date',
+    type: 'datetime',
     name: 'created_at',
+    default: () => 'CURRENT_TIMESTAMP',
   })
   createdAt: Date;
 
   @UpdateDateColumn({
-    type: 'date',
+    type: 'datetime',
     name: 'updated_at',
+    default: () => 'CURRENT_TIMESTAMP',
   })
   updatedAt: Date;
 

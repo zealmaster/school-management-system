@@ -37,12 +37,14 @@ export class TeacherLogin extends BaseEntity {
   @CreateDateColumn({
     name: 'created_at',
     type: 'datetime',
+    default: () => 'CURRENT_TIMESTAMP',
   })
   createdAt: Date;
 
   @UpdateDateColumn({
     name: 'login_at',
     type: 'datetime',
+    default: () => 'CURRENT_TIMESTAMP',
   })
   loginAt: Date;
   

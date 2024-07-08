@@ -14,11 +14,13 @@ import { Location } from './location.entity';
 import { User } from './user.entity';
 import { Student } from './student.entity';
 import { Teacher } from './teacher.entity';
-import { SchoolType } from './school-type.entity';
 
 @Entity('schools')
 export class School extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({
+    type: 'bigint',
+    unsigned: true,
+  })
   id: number;
 
   @Column({
@@ -33,21 +35,27 @@ export class School extends BaseEntity {
   })
   locationId: number;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+  })
   name: string;
 
-  @Column()
+  @Column({
+    type: 'varchar',
+  })
   address: string;
 
   @CreateDateColumn({
-    type: 'date',
+    type: 'datetime',
     name: 'created_at',
+    default: () => 'CURRENT_TIMESTAMP',
   })
   createdAt: Date;
 
   @UpdateDateColumn({
-    type: 'date',
-    name: 'updated_At',
+    type: 'datetime',
+    name: 'updated_at',
+    default: () => 'CURRENT_TIMESTAMP',
   })
   updatedAt: Date;
 

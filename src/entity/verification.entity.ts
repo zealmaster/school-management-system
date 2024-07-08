@@ -8,7 +8,10 @@ import {
 
 @Entity('two_fa_codes')
 export class TwoFa extends BaseEntity {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({
+    type: 'bigint',
+    unsigned: true,
+  })
   id: number;
 
   @Column({
@@ -25,7 +28,8 @@ export class TwoFa extends BaseEntity {
 
   @CreateDateColumn({
     name: 'created_at',
-    type: 'date',
+    type: 'datetime',
+    default: () => 'CURRENT_TIMESTAMP',
   })
   createdAt: Date;
 

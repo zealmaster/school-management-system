@@ -47,7 +47,7 @@ export class StudentService {
       schoolId: student.schoolId,
       studentId: newStudent.id,
       totalFees: fees.amount,
-      status: FEES_STATUS.default,
+      status: FEES_STATUS.OWING,
       level: newStudent.level,
     };
     await this.feesRecordRepo.save(feesRecord);
@@ -66,7 +66,7 @@ export class StudentService {
         schoolId: existingStudent.schoolId,
         studentId: newStudent.id,
         totalFees: fees.amount,
-        status: FEES_STATUS.default,
+        status: FEES_STATUS.OWING,
         level: student.level,
       };
       await this.feesRecordRepo.save(feesRecord);

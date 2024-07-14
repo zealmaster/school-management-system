@@ -9,9 +9,9 @@ import { Repository } from 'typeorm';
 import { FeesReceipt } from 'src/entity/fees-receipt.entity';
 
 export const FEES_STATUS = {
-  complete: 1,
-  partPayment: 0,
-  default: 2,
+  OWING: 0,
+  PART_PAYMENT: 1,
+  COMPLETE: 2,
 };
 
 export const receipt_reference_no = `FEES-${Math.round(
@@ -40,7 +40,6 @@ export class FeesService {
   ) {}
 
   public async addFees(fees: AddFeesDto) {
-    console.log(fees);
     return await this.feesRepo.save(fees);
   }
 
@@ -58,14 +57,14 @@ export class FeesService {
 
   public async getStudentsWithFeesBalance(schoolId: number) {
     return await this.feesRecordRepo.findBy({
-      status: FEES_STATUS.partPayment,
+      status: FEES_STATUS.PART_PAYMENT,
       schoolId,
     });
   }
 
   public async getStudentsOwingCompleteFees(schoolId: number) {
     const feesDefaulters = await this.feesRecordRepo.findAndCountBy({
-      status: FEES_STATUS.default,
+      status: FEES_STATUS.OWING,
       schoolId,
     });
     return { feesDefaulters };
@@ -102,8 +101,8 @@ export class FeesService {
       amountPaid,
       status:
         amountPaid === Number(paid.totalFees)
-          ? FEES_STATUS.complete
-          : FEES_STATUS.partPayment,
+          ? FEES_STATUS.COMPLETE
+          : FEES_STATUS.PART_PAYMENT,
       balance: Number(paid.totalFees) - amountPaid,
       session: feesPayment.session,
     };

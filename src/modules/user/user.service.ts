@@ -38,8 +38,8 @@ export class UserService {
         password: passwordHash,
         username: data.username,
         email: data.email,
-        first_name: data.firstName,
-        last_name: data.lastName,
+        firstName: data.firstName,
+        lastName: data.lastName,
       };
       const user = await this.userRepository.save(newUser);
       await this.verificationRepo.save(

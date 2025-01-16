@@ -10,6 +10,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { School } from './school.entity';
+import { FeesReceipt } from './fees-receipt.entity';
 
 @Entity('students')
 export class Student extends BaseEntity {
@@ -128,6 +129,9 @@ export class Student extends BaseEntity {
   @OneToOne(() => School, (school) => school.students)
   @JoinColumn({ name: 'school_id' })
   school: School;
+
+  @OneToOne(() => FeesReceipt)
+  feeReceipt: FeesReceipt;
 
   // constructor
   constructor(data: {

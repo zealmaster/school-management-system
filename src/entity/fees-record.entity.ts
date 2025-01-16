@@ -3,9 +3,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Student } from './student.entity';
+import { School } from './school.entity';
 
 @Entity('fees_records')
 export class FeesRecord extends BaseEntity {
@@ -77,6 +82,14 @@ export class FeesRecord extends BaseEntity {
   })
   updatedAt: Date;
 
+  // relations
+  @ManyToOne(() => Student, (student) => student.feesRecord)
+  student: Student;
+
+  @OneToOne(() => School)
+  @JoinColumn({name: 'school_id'})
+  school: School;
+  
   // constructor
   constructor(data: {
     studentId: number;

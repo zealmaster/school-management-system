@@ -4,6 +4,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -50,10 +51,9 @@ export class FeesReceipt extends BaseEntity {
   createdAt: Date;
 
   // relations
-  @OneToOne(() => Student)
-  @JoinColumn({name: 'student_id'})
+  @ManyToOne(() => Student, (student) => student.feeReceipts)
   student: Student;
-  
+
   // constructor
   constructor(data: {
     studentId: number;

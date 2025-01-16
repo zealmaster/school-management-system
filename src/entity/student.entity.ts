@@ -5,6 +5,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -130,8 +131,8 @@ export class Student extends BaseEntity {
   @JoinColumn({ name: 'school_id' })
   school: School;
 
-  @OneToOne(() => FeesReceipt)
-  feeReceipt: FeesReceipt;
+  @OneToMany(() => FeesReceipt, (feesReceipt) => feesReceipt.student)
+  feeReceipts: FeesReceipt[];
 
   // constructor
   constructor(data: {

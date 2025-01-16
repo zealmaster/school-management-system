@@ -15,6 +15,7 @@ import { User } from './user.entity';
 import { Student } from './student.entity';
 import { Teacher } from './teacher.entity';
 import { Fees } from './fees.entity';
+import { SchoolType } from './school-type.entity';
 
 @Entity('schools')
 export class School extends BaseEntity {
@@ -35,6 +36,12 @@ export class School extends BaseEntity {
     name: 'location_id',
   })
   locationId: number;
+
+  @Column({
+    type: 'bigint',
+    name: 'school_type_id',
+  })
+  schoolTypeId: number;
 
   @Column({
     type: 'varchar',
@@ -77,8 +84,8 @@ export class School extends BaseEntity {
   @OneToMany(() => Fees, (fee) => fee.school)
   fees: Fees[];
 
-  // @OneToOne(() => SchoolType)
-  // schoolType: SchoolType;
+  @ManyToOne(() => SchoolType, (schoolType) => schoolType.schools)
+  schoolType: SchoolType;
 
   // constructor
   constructor(data: {

@@ -3,7 +3,7 @@ import { CreateUserDto } from '../user/dto/user.dto';
 import * as nodemailer from 'nodemailer';
 import * as dotenv from 'dotenv';
 import { InjectRepository } from '@nestjs/typeorm';
-import { TwoFa } from 'src/entity/verification.entity';
+import { TwoFa } from 'src/entity/twoFa.entity';
 import { Repository } from 'typeorm';
 import { User } from 'src/entity/user.entity';
 dotenv.config();

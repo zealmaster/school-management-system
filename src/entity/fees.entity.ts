@@ -3,9 +3,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { School } from './school.entity';
 
 @Entity('fees')
 export class Fees extends BaseEntity {
@@ -47,6 +49,10 @@ export class Fees extends BaseEntity {
     default: () => 'CURRENT_TIMESTAMP',
   })
   updatedAt: Date;
+
+  //relations
+  @ManyToOne(() => School, (school) => school.fees)
+  school: School;
 
   // constructor
   constructor(data: { schoolId: number; level: string; amount: number }) {

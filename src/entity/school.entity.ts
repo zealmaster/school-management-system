@@ -14,6 +14,7 @@ import { Location } from './location.entity';
 import { User } from './user.entity';
 import { Student } from './student.entity';
 import { Teacher } from './teacher.entity';
+import { Fees } from './fees.entity';
 
 @Entity('schools')
 export class School extends BaseEntity {
@@ -72,6 +73,9 @@ export class School extends BaseEntity {
 
   @OneToMany(() => Teacher, (teacher) => teacher.school)
   teacher: Teacher[];
+
+  @OneToMany(() => Fees, (fee) => fee.school)
+  fees: Fees[];
 
   // @OneToOne(() => SchoolType)
   // schoolType: SchoolType;

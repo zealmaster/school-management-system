@@ -11,9 +11,16 @@ export class createFeesReceiptsTable1683461221686
         created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
         FOREIGN KEY (student_id) REFERENCES students(id))`,
     );
+
+    await queryRunner.query(
+      `ALTER TABLE fees_receipts ADD CONSTRAINT FK_feeReceipt_studentId_1 FOREIGN KEY (student_id) REFERENCES students(id)`,
+    );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
+    await queryRunner.query(
+      `ALTER TABLE fees_receipts REMOVE FOREIGN KEY FK_feeReceipt_studentId_1`,
+    );
     await queryRunner.query(`DROP TABLE fees_receipts`);
   }
 }

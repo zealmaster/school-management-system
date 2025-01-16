@@ -1,4 +1,12 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { School } from './school.entity';
 
 @Entity('school-type')
@@ -33,10 +41,9 @@ export class SchoolType extends BaseEntity {
   school: School;
 
   // constructor
-  constructor(data: { type: string, }) {
-    super()
+  constructor(data: { type: string }) {
+    super();
     if (!data) return;
     this.type = data.type;
   }
-
 }

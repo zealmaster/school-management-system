@@ -12,7 +12,7 @@ export class AuthService {
     private userService: UserService,
     private jwtService: JwtService,
     private emailService: EmailService,
-  ) { }
+  ) {}
 
   signJWT(user: Partial<User>) {
     const payload = { email: user.email, sub: user.id, name: user.username };
@@ -31,7 +31,6 @@ export class AuthService {
         return { success: true, user: result };
       }
       return { success: false, message: 'password incorrect' };
-
     } catch (error) {
       console.log(error);
     }
@@ -45,19 +44,33 @@ export class AuthService {
         this.emailService.sendTwoFaCode(user.id, user.email);
         return true;
       } else {
-        throw new HttpException('Wrong credentials provided ', HttpStatus.BAD_REQUEST);
+        throw new HttpException(
+          'Wrong credentials provided ',
+          HttpStatus.BAD_REQUEST,
+        );
       }
     } catch (error) {
-      throw new HttpException('Wrong credentials provided ', HttpStatus.BAD_REQUEST);
+      throw new HttpException(
+        'Wrong credentials provided ',
+        HttpStatus.BAD_REQUEST,
+      );
     }
   }
 
   async login(user: any, twoFaCode: string) {
     try {
       if (!twoFaCode) return false;
-      const confirmTwoFaCode = await this.emailService.confirmTwoFaCode(user.id, twoFaCode);
+      const confirmTwoFaCode = await this.emailService.confirmTwoFaCode(
+        user.id,
+        twoFaCode,
+      );
       if (!confirmTwoFaCode) return false;
-      const payload = { email: user.email, sub: user.id, countryId: user.countryId, status: user.status };
+      const payload = {
+        email: user.email,
+        sub: user.id,
+        countryId: user.countryId,
+        status: user.status,
+      };
       return {
         ...user,
         access_token: this.signJWT(payload),
@@ -66,5 +79,4 @@ export class AuthService {
       return { success: false, message: error };
     }
   }
-
 }

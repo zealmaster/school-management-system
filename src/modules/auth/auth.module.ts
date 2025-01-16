@@ -18,7 +18,7 @@ import { EmailModule } from '../email/email.module';
       secret: jwtConstants.secret,
       signOptions: { expiresIn: '24h' },
     }),
-    EmailModule
+    EmailModule,
   ],
   providers: [AuthService, LocalStrategy, JwtStrategy],
   controllers: [AuthController],

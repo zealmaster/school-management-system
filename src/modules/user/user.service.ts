@@ -19,18 +19,22 @@ export class UserService {
     private verificationRepo: Repository<TwoFa>,
     private jwtService: JwtService,
     private emailService: EmailService,
-  ) { }
+  ) {}
 
   async createUser(data: CreateUserDto) {
     try {
-      const emailExists = await this.userRepository.findOneBy({ email: data.email });
-      const usernameExists = await this.userRepository.findOneBy({ username: data.username });
+      const emailExists = await this.userRepository.findOneBy({
+        email: data.email,
+      });
+      const usernameExists = await this.userRepository.findOneBy({
+        username: data.username,
+      });
 
       if (emailExists) {
-        return { success: false, message: "Email already exists." }
+        return { success: false, message: 'Email already exists.' };
       }
       if (usernameExists) {
-        return { success: false, message: "Username already exists." }
+        return { success: false, message: 'Username already exists.' };
       }
 
       const passwordHash = await bcrypt.hash(data.password, 10);
@@ -50,8 +54,7 @@ export class UserService {
       );
       await this.emailService.sendUserConfirmation(data);
 
-      return { success: true, user }
-
+      return { success: true, user };
     } catch (error) {
       console.log(error);
     }
@@ -99,11 +102,10 @@ export class UserService {
         };
         user.push(userDetail);
       }
-      
+
       return user;
     } catch (error) {
       console.log(error);
     }
   }
-
 }

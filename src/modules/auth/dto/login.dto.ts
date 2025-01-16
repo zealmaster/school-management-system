@@ -8,5 +8,4 @@ export class LoginDto {
   @IsNotEmpty()
   @Length(3)
   password: string;
-  
 }

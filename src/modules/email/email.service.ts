@@ -27,7 +27,7 @@ export class EmailService {
     private verificationRepo: Repository<TwoFa>,
     @InjectRepository(User)
     private userRepo: Repository<User>,
-  ) { }
+  ) {}
 
   async sendMail(email: string, subject: string, text: string) {
     const mailOptions = {
@@ -43,36 +43,43 @@ export class EmailService {
     const link = 'http://localhost:4000/email/confirm-email';
     const subject = 'Confirm registered email';
     const text = `Click the link ${link} to enter confirmation code <> ${code} <>`;
-    await this.sendMail(user.email, subject, text)
+    await this.sendMail(user.email, subject, text);
   }
 
   public async confirmEmail(code: string) {
     try {
-      const verifyCode = await this.verificationRepo.findOneBy({ twoFaCode: code });
+      const verifyCode = await this.verificationRepo.findOneBy({
+        twoFaCode: code,
+      });
       if (verifyCode) {
         await this.verificationRepo.delete({ id: verifyCode.id });
         await this.userRepo.update(verifyCode?.userId, { verifiedEmail: 1 });
-        return {success: true, message: 'Email confirmed'};
+        return { success: true, message: 'Email confirmed' };
       } else {
-        return {success: false, message: 'Verification token is incorrect. Email could not be verified'};
+        return {
+          success: false,
+          message:
+            'Verification token is incorrect. Email could not be verified',
+        };
       }
-  
     } catch (error) {
       console.log(error);
     }
   }
-  
+
   public async confirmTwoFaCode(userId: number, code: string) {
     try {
-      const verifyCode = await this.verificationRepo.findOneBy({ userId, twoFaCode: code });
-      console.log(verifyCode)
+      const verifyCode = await this.verificationRepo.findOneBy({
+        userId,
+        twoFaCode: code,
+      });
+      console.log(verifyCode);
       if (verifyCode) {
         await this.verificationRepo.delete({ id: verifyCode.id });
         return true;
       } else {
         return false;
       }
-  
     } catch (error) {
       console.log(error);
     }
@@ -81,18 +88,20 @@ export class EmailService {
   public async sendTwoFaCode(userId: number, email: string) {
     try {
       const twoFaCode = code.toString();
-      const existingUserToken = await this.verificationRepo.findOneBy({ userId });
+      const existingUserToken = await this.verificationRepo.findOneBy({
+        userId,
+      });
       if (existingUserToken) {
         await this.verificationRepo.delete({ userId });
       }
-      await this.verificationRepo.save(new TwoFa({ userId: userId, twoFaCode }));
-      const subject = 'Authentication Code'
+      await this.verificationRepo.save(
+        new TwoFa({ userId: userId, twoFaCode }),
+      );
+      const subject = 'Authentication Code';
       const text = `Use this authentication code < ${code} > to confirm your email.`;
       await this.sendMail(email, subject, text);
-  
     } catch (error) {
       console.log(error);
     }
   }
-
 }

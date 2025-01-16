@@ -15,5 +15,4 @@ export class UserController {
   signUp(@Body() userDto: CreateUserDto) {
     return this.userService.createUser(userDto);
   }
-
 }

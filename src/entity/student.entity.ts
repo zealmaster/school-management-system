@@ -5,11 +5,14 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { School } from './school.entity';
+import { FeesReceipt } from './fees-receipt.entity';
+import { FeesRecord } from './fees-record.entity';
 
 @Entity('students')
 export class Student extends BaseEntity {
@@ -128,6 +131,12 @@ export class Student extends BaseEntity {
   @OneToOne(() => School, (school) => school.students)
   @JoinColumn({ name: 'school_id' })
   school: School;
+
+  @OneToMany(() => FeesReceipt, (feesReceipt) => feesReceipt.student)
+  feeReceipts: FeesReceipt[];
+
+  @OneToMany(() => FeesRecord, (feesRecord) => feesRecord.student)
+  feesRecord: FeesRecord[];
 
   // constructor
   constructor(data: {

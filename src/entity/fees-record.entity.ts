@@ -3,9 +3,20 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { Student } from './student.entity';
+import { School } from './school.entity';
+
+export const FEES_STATUS = {
+  OWING: 0,
+  PART_PAYMENT: 1,
+  COMPLETE: 2,
+};
 
 @Entity('fees_records')
 export class FeesRecord extends BaseEntity {
@@ -54,6 +65,7 @@ export class FeesRecord extends BaseEntity {
   @Column({
     name: 'status',
     type: 'tinyint',
+    default: FEES_STATUS.OWING,
   })
   status: number;
 
@@ -77,6 +89,14 @@ export class FeesRecord extends BaseEntity {
   })
   updatedAt: Date;
 
+  // relations
+  @ManyToOne(() => Student, (student) => student.feesRecord)
+  student: Student;
+
+  @OneToOne(() => School)
+  @JoinColumn({name: 'school_id'})
+  school: School;
+  
   // constructor
   constructor(data: {
     studentId: number;

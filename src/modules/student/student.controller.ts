@@ -23,6 +23,7 @@ import { Express } from 'express';
 import { diskStorage } from 'multer';
 import * as path from 'path';
 import { StudentLoginDto } from './dto/studentLoginDto';
+import { AdminJwtAuthGuard } from 'src/guards/jwt-auth.guard';
 
 const storage = diskStorage({
   destination: function (req, file, cb) {
@@ -58,7 +59,7 @@ export class StudentController {
 
   @Put('student/:id')
   @UsePipes(ValidationPipe)
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AdminJwtAuthGuard)
   async updateStudent(
     @Param('id', ParseIntPipe) id: number,
     @Body() student: UpdateStudentDto,
@@ -67,13 +68,13 @@ export class StudentController {
   }
 
   @Delete('student/:id')
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AdminJwtAuthGuard)
   async removeStudent(@Param('id', ParseIntPipe) id: number) {
     return await this.studentService.removeStudent(id);
   }
 
   @Get('students')
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AdminJwtAuthGuard)
   async getAllStudents() {
     return await this.studentService.getAllStudents();
   }

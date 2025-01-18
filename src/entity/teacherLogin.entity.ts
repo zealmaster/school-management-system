@@ -47,13 +47,12 @@ export class TeacherLogin extends BaseEntity {
     default: () => 'CURRENT_TIMESTAMP',
   })
   loginAt: Date;
-  
-    // constructor
-    constructor(data: { teacherId: number; password: string }) {
-      super();
-      if (!data) return;
-      this.teacherId = data.teacherId;
-      this.password = data.password;
-    }
-  
+
+  // constructor
+  constructor(data: { teacherId: number; password: string }) {
+    super();
+    if (!data) return;
+    this.teacherId = data.teacherId;
+    this.password = data.password;
+  }
 }

@@ -1,9 +1,7 @@
 import {
   Controller,
-  Get,
   Request,
   UseGuards,
-  Session,
   Post,
   Body,
 } from '@nestjs/common';
@@ -24,7 +22,7 @@ export class AuthController {
     return {
       success: true,
       msg: 'Enter the two factor authentication code sent to your email',
-    }; 
+    };
   }
 
   @UseGuards(LocalAuthGuard)
@@ -34,6 +32,6 @@ export class AuthController {
     if (!user) {
       return { success: false, msg: 'Invalid authentication code' };
     }
-    return user
+    return user;
   }
 }

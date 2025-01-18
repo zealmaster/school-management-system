@@ -3,10 +3,10 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { AddStudentDto } from 'src/modules/student/dto/addStudent.dto';
 import { StudentLoginDto } from './dto/studentLoginDto';
 import { UpdateStudentDto } from 'src/modules/student/dto/updateStudent.dto';
-import { FeesRecord } from 'src/entity/fees-record.entity';
+import { FEES_STATUS, FeesRecord } from 'src/entity/fees-record.entity';
 import { Student } from 'src/entity/student.entity';
 import { StudentLogin } from 'src/entity/studentLogin.entity';
-import { FEES_STATUS, FeesService } from 'src/modules/fees/fees.service';
+import { FeesService } from 'src/modules/fees/fees.service';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { generatePassword } from 'src/strings';
@@ -47,7 +47,6 @@ export class StudentService {
       schoolId: student.schoolId,
       studentId: newStudent.id,
       totalFees: fees.amount,
-      status: FEES_STATUS.OWING,
       level: newStudent.level,
     };
     await this.feesRecordRepo.save(feesRecord);
@@ -66,7 +65,6 @@ export class StudentService {
         schoolId: existingStudent.schoolId,
         studentId: newStudent.id,
         totalFees: fees.amount,
-        status: FEES_STATUS.OWING,
         level: student.level,
       };
       await this.feesRecordRepo.save(feesRecord);
@@ -91,7 +89,6 @@ export class StudentService {
 
   //student actions
   public async loginStudent(login: StudentLoginDto) {
-    console.log(login);
     const student = await this.studentLoginRepo.findOneBy({
       studentId: login.studentId,
     });

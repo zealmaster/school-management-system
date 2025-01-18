@@ -3,8 +3,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Student } from './student.entity';
 
 @Entity('fees_receipts')
 export class FeesReceipt extends BaseEntity {
@@ -45,6 +49,10 @@ export class FeesReceipt extends BaseEntity {
     default: () => 'CURRENT_TIMESTAMP',
   })
   createdAt: Date;
+
+  // relations
+  @ManyToOne(() => Student, (student) => student.feeReceipts)
+  student: Student;
 
   // constructor
   constructor(data: {

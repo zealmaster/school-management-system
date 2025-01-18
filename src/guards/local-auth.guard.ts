@@ -12,7 +12,6 @@ export class LocalAuthGuard extends AuthGuard('local') {
     super();
   }
   async canActivate(context: ExecutionContext) {
-    // Add your custom authentication logic here
     const request = context.switchToHttp().getRequest();
     const email = request.body.email;
     const password = request.body.password;
@@ -24,4 +23,3 @@ export class LocalAuthGuard extends AuthGuard('local') {
     return user;
   }
 }
-

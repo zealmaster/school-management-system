@@ -1,7 +1,15 @@
-import { BaseEntity, Column, CreateDateColumn, Entity, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 import { School } from './school.entity';
 
-@Entity('school-type')
+@Entity('school_types')
 export class SchoolType extends BaseEntity {
   @PrimaryGeneratedColumn({
     type: 'bigint',
@@ -29,14 +37,13 @@ export class SchoolType extends BaseEntity {
   updatedAt: Date;
 
   // relation
-  @OneToOne(() => School)
-  school: School;
+  @OneToMany(() => School, (school) => school.schoolType)
+  schools: School[];
 
   // constructor
-  constructor(data: { type: string, }) {
-    super()
+  constructor(data: { type: string }) {
+    super();
     if (!data) return;
     this.type = data.type;
   }
-
 }

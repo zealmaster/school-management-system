@@ -15,7 +15,7 @@ export class AdminController {
 
   @Post('login')
   async adminLogin(@Body() adminLogin: AdminLoginDto): Promise<Admin> {
-    return await this.adminService.addLogin(
+    return await this.adminService.login(
       adminLogin.email,
       adminLogin.password,
     );

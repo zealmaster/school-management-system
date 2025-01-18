@@ -12,6 +12,12 @@ import {
 import { Student } from './student.entity';
 import { School } from './school.entity';
 
+export const FEES_STATUS = {
+  OWING: 0,
+  PART_PAYMENT: 1,
+  COMPLETE: 2,
+};
+
 @Entity('fees_records')
 export class FeesRecord extends BaseEntity {
   @PrimaryGeneratedColumn({
@@ -59,6 +65,7 @@ export class FeesRecord extends BaseEntity {
   @Column({
     name: 'status',
     type: 'tinyint',
+    default: FEES_STATUS.OWING,
   })
   status: number;
 

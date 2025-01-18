@@ -16,7 +16,7 @@ import { EmailModule } from '../email/email.module';
     TypeOrmModule.forFeature([User]),
     JwtModule.register({
       secret: jwtConstants.secret,
-      signOptions: { expiresIn: '24h' },
+      signOptions: { expiresIn: '150d' },
     }),
     EmailModule,
   ],

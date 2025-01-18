@@ -20,7 +20,7 @@ export class AuthService {
   }
 
   async validateUser(email: string, password: string): Promise<any> {
-    try {
+    try { 
       const user = await this.userService.findUserByEmail(email);
       if (!user) {
         return { success: false, message: 'Incorrect email' };
@@ -28,7 +28,7 @@ export class AuthService {
       const isMatch = await bcrypt.compare(password, user.password);
       if (user && isMatch) {
         const { password, ...result } = user;
-        return { success: true, user: result };
+        return result;
       }
       return { success: false, message: 'password incorrect' };
     } catch (error) {
@@ -59,20 +59,21 @@ export class AuthService {
 
   async login(user: any, twoFaCode: string) {
     try {
+      const userId = user.id;
       if (!twoFaCode) return false;
       const confirmTwoFaCode = await this.emailService.confirmTwoFaCode(
-        user.id,
+        userId,
         twoFaCode,
       );
       if (!confirmTwoFaCode) return false;
       const payload = {
         email: user.email,
-        sub: user.id,
-        countryId: user.countryId,
+        sub: userId,
         status: user.status,
       };
       return {
-        ...user,
+        success: true,
+        user,
         access_token: this.signJWT(payload),
       };
     } catch (error) {

@@ -19,31 +19,45 @@ export class TeacherService {
     private teacherLoginRepo: Repository<TeacherLogin>,
   ) {}
 
-  public async addTeacher(teacher: AddTeacherDto) {
-    const addedTeacher = await this.teacherRepo.findOneBy({
-      email: teacher.email,
-      phone: teacher.phone,
-    });
-    if (addedTeacher) return 'Teacher already added';
-    const newTeacher = await this.teacherRepo.save(teacher);
-    const password = await bcrypt.hash(generatePassword, 10);
-    await this.teacherLoginRepo.save({
-      teacherId: newTeacher.id,
-      password: password,
-      passwordTemp: generatePassword,
-    });
-    return newTeacher;
+  public async addTeacher(data: AddTeacherDto) {
+    try {
+      const { email, phone } = data;
+      const addedTeacher = await this.teacherRepo.findOneBy({
+        email,
+        phone,
+      });
+      if (addedTeacher) return 'Teacher already added';
+      const newTeacher = await this.teacherRepo.save(data);
+      const password = await bcrypt.hash(generatePassword, 10);
+      await this.teacherLoginRepo.save({
+        teacherId: newTeacher.id,
+        password: password,
+        passwordTemp: generatePassword,
+      });
+      return newTeacher;
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   public async assignSubject(subjectId: number, teacherId: number) {
-    const teacher = await this.teacherRepo.findOneBy({ id: teacherId });
-    if (teacher) {
-      await this.subjectRepo.update(subjectId, { teacherId: teacherId });
+    try {
+      const teacher = await this.teacherRepo.findOneBy({ id: teacherId });
+      if (teacher) {
+        await this.subjectRepo.update(subjectId, { teacherId: teacherId });
+      }
+      return { success: true, message: 'subject assigned successfully' };
+    } catch (error) {
+      console.log(error);
     }
   }
 
   public async getAllTeachers() {
-    const teachers = await this.teacherRepo.find({ relations: ['school'] });
-    return { teachers };
+    try {
+      const teachers = await this.teacherRepo.find({ relations: ['school'] });
+      return { teachers };
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

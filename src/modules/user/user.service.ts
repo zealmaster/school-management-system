@@ -1,10 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { LoginDto } from './dto/login.dto';
 import { User } from 'src/entity/user.entity';
 import { Repository } from 'typeorm';
 import * as bcrypt from 'bcrypt';
-import { JwtService } from '@nestjs/jwt';
 import { EmailService } from 'src/modules/email/email.service';
 import { TwoFa } from 'src/entity/twoFa.entity';
 import { code } from 'src/modules/email/email.service';
@@ -17,18 +15,14 @@ export class UserService {
     private userRepository: Repository<User>,
     @InjectRepository(TwoFa)
     private verificationRepo: Repository<TwoFa>,
-    private jwtService: JwtService,
     private emailService: EmailService,
   ) {}
 
   async createUser(data: CreateUserDto) {
     try {
-      const emailExists = await this.userRepository.findOneBy({
-        email: data.email,
-      });
-      const usernameExists = await this.userRepository.findOneBy({
-        username: data.username,
-      });
+      const { email, username, firstName, lastName, password } = data;
+      const emailExists = await this.userRepository.findOneBy({ email });
+      const usernameExists = await this.userRepository.findOneBy({ username });
 
       if (emailExists) {
         return { success: false, message: 'Email already exists.' };
@@ -40,10 +34,10 @@ export class UserService {
       const passwordHash = await bcrypt.hash(data.password, 10);
       const newUser = {
         password: passwordHash,
-        username: data.username,
-        email: data.email,
-        firstName: data.firstName,
-        lastName: data.lastName,
+        username,
+        email,
+        firstName,
+        lastName,
       };
       const user = await this.userRepository.save(newUser);
       await this.verificationRepo.save(
@@ -52,7 +46,7 @@ export class UserService {
           twoFaCode: code.toString(),
         }),
       );
-      await this.emailService.sendUserConfirmation(data);
+      await this.emailService.sendUserConfirmation(email);
 
       return { success: true, user };
     } catch (error) {
@@ -60,7 +54,6 @@ export class UserService {
     }
   }
 
-  // find user by ID for use in
   async findUserById(userId: number): Promise<User> {
     try {
       return await this.userRepository.findOneBy({ id: userId });

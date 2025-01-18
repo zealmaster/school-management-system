@@ -36,4 +36,13 @@ export class UpdateStudentDto {
   @IsString()
   @IsOptional()
   passportPicture: string;
+
+  @IsString()
+  @IsOptional()
+  graduationYear: string;
+
+  @IsString()
+  @IsOptional()
+  graduationSession: string;
+
 }

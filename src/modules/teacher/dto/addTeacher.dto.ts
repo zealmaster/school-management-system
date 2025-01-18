@@ -1,7 +1,8 @@
-import { IsDate, IsNumber, IsOptional, IsString } from 'class-validator';
+import { IsDate, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class AddTeacherDto {
   @IsString()
+  @IsNotEmpty()
   firstName: string;
 
   @IsString()
@@ -9,12 +10,15 @@ export class AddTeacherDto {
   title: string;
 
   @IsNumber()
+  @IsNotEmpty()
   schoolId: number;
 
   @IsString()
+  @IsNotEmpty()
   dateOfBirth: string;
 
   @IsString()
+  @IsNotEmpty()
   lastName: string;
 
   @IsString()
@@ -22,14 +26,18 @@ export class AddTeacherDto {
   middleName: string;
 
   @IsString()
+  @IsNotEmpty()
   sex: string;
 
   @IsString()
+  @IsNotEmpty()
   address: string;
 
   @IsString()
+  @IsNotEmpty()
   phone: string;
 
   @IsString()
+  @IsNotEmpty()
   email: string;
 }

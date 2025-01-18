@@ -30,20 +30,28 @@ export class EmailService {
   ) {}
 
   async sendMail(email: string, subject: string, text: string) {
-    const mailOptions = {
-      from: process.env.SMTP_USER,
-      to: email,
-      subject,
-      text,
-    };
-    await transporter.sendMail(mailOptions);
+    try {
+      const mailOptions = {
+        from: process.env.SMTP_USER,
+        to: email,
+        subject,
+        text,
+      };
+      await transporter.sendMail(mailOptions);  
+    } catch (error) {
+      console.log(error)
+    }
   }
 
-  async sendUserConfirmation(user: CreateUserDto) {
-    const link = 'http://localhost:4000/email/confirm-email';
-    const subject = 'Confirm registered email';
-    const text = `Click the link ${link} to enter confirmation code <> ${code} <>`;
-    await this.sendMail(user.email, subject, text);
+  async sendUserConfirmation(email: string) {
+    try {
+      const link = 'http://localhost:4000/email/confirm-email';
+      const subject = 'Confirm registered email';
+      const text = `Click the link ${link} to enter confirmation code <> ${code} <>`;
+      await this.sendMail(email, subject, text);  
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   public async confirmEmail(code: string) {

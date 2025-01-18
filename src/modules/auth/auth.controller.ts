@@ -1,9 +1,7 @@
 import {
   Controller,
-  Get,
   Request,
   UseGuards,
-  Session,
   Post,
   Body,
 } from '@nestjs/common';

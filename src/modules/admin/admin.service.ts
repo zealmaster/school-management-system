@@ -16,38 +16,52 @@ export class AdminService {
 
   signJwt(admin: Partial<Admin>) {
     const payload = { email: admin.email, sub: admin.id };
-    return {
-      access_token: this.jwtService.sign(payload),
-      ...admin,
-    };
+    return this.jwtService.sign(payload);
   }
 
-  async createAdmin(addAdmin: CreateAdminDto): Promise<Admin | any> {
-    const fullName = `${addAdmin.firstName} ${addAdmin.lastName}`;
-    const passwordHash = await bcrypt.hash(addAdmin.password, 10);
-    const newAdmin = {
-      firstName: addAdmin.firstName,
-      lastName: addAdmin.lastName,
-      fullName: fullName,
-      password: passwordHash,
-      email: addAdmin.email,
-    };
-    const adminAdded = await this.adminRepo.save(new Admin(newAdmin));
-    return adminAdded;
-  }
-
-  async addLogin(email: string, password: string): Promise<Admin | any> {
-    const existingAdmin = await this.adminRepo.findOneBy({ email: email });
-    if (
-      existingAdmin &&
-      (await bcrypt.compare(password, existingAdmin.password))
-    ) {
-      const { password, ...result } = existingAdmin;
-      return this.signJwt(result);
-    } else
-      return {
-        success: false,
-        message: 'Wrong credentials',
+  async createAdmin(data: CreateAdminDto): Promise<Admin | any> {
+    try {
+      const { firstName, lastName, password, email } = data;
+      const fullName = `${firstName} ${lastName}`;
+      const passwordHash = await bcrypt.hash(password, 10);
+      const newAdmin = {
+        firstName,
+        lastName,
+        fullName,
+        password: passwordHash,
+        email,
       };
+      const adminAdded = await this.adminRepo.save(new Admin(newAdmin));
+      return { success: true, admin: adminAdded };
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async login(email: string, password: string): Promise<Admin | any> {
+    try {
+      const adminExists = await this.adminRepo.findOneBy({ email: email });
+      const correctPassword = await bcrypt.compare(
+        password,
+        adminExists.password,
+      );
+      if (!correctPassword) {
+        return { success: false, message: 'Wrong password' };
+      }
+      if (adminExists && correctPassword) {
+        const { password, ...result } = adminExists;
+        return {
+          success: true,
+          admin: result,
+          accessToken: this.signJwt(result),
+        };
+      } else
+        return {
+          success: false,
+          message: 'Wrong credentials',
+        };
+    } catch (error) {
+      console.log(error);
+    }
   }
 }

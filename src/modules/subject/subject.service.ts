@@ -12,21 +12,40 @@ export class SubjectService {
     private subjectRepo: Repository<Subject>,
   ) {}
 
-  public async addSubject(subject: AddSubjectDto) {
-    const existingSubject = await this.subjectRepo.findOneBy({
-      name: subject.name,
-      level: subject.level,
-    });
-    if (existingSubject) return 'Subject already added';
-    return await this.subjectRepo.save(subject);
+  public async addSubject(data: AddSubjectDto) {
+    try {
+      const { name, level } = data;
+      const existingSubject = await this.subjectRepo.findOneBy({
+        name,
+        level,
+      });
+      if (existingSubject) {
+        return { success: false, message: 'Subject already added' };
+      }
+      const subject = await this.subjectRepo.save(data);
+      return { success: true, message: 'subject added successfully', subject };
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  public async updateSubject(id: number, subject: UpdateSubjectDto) {
-    await this.subjectRepo.update(id, subject);
-    return 'Updated successfully';
+  public async updateSubject(
+    id: number,
+    subject: UpdateSubjectDto,
+  ): Promise<string | any> {
+    try {
+      await this.subjectRepo.update(id, subject);
+      return { success: true, message: 'Updated successfully' };
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   public async getAllSubject() {
-    return await this.subjectRepo.find();
+    try {
+      return await this.subjectRepo.find();
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
